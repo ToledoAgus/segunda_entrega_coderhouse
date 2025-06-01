@@ -693,7 +693,7 @@ h1, h2, h3 {
         grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
     }
 
-    .tarjeta-producto img, .miembro-equipo img {
+    .tarjeta-producto img, .miembro-equipo img, .imagen-uno, .imagen-dos, .imagen-tres {
         height: 180px;
     }
 
