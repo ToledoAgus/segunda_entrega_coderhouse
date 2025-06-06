@@ -1,0 +1,19 @@
+{
+  "name": "2da_entrega_coderhouse_2025",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ToledoAgus/segunda_entrega_coderhouse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ToledoAgus/segunda_entrega_coderhouse/issues"
+  },
+  "homepage": "https://github.com/ToledoAgus/segunda_entrega_coderhouse#readme",
+  "description": ""
+}
