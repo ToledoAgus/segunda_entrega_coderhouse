@@ -9,6 +9,8 @@ $color-texto-gris: #a0aec0; // Texto gris suave
 $sombra-futurista: 0 0 15px rgba(0, 234, 255, 0.6); // Sombra con efecto neón
 $transicion-rapida: all 0.3s ease;
 
+// --- Mixins ---
+
 // Mixin para estilos de fondo de sección
 @mixin section-background {
   background-image: url("./imagen_fondo.jpg");
@@ -50,7 +52,17 @@ $transicion-rapida: all 0.3s ease;
   text-shadow: 0 0 5px $color-acento-neon;
 }
 
-/* Estilos Generales */
+// NUEVO MIXIN: Mixin para imágenes responsivas
+@mixin responsive-image($max-width: none, $height: auto) {
+  width: 100%;           // La imagen ocupará el 100% del ancho de su contenedor
+  max-width: $max-width; // Opcional: Define un ancho máximo si es necesario
+  height: $height;       // Mantiene la proporción automáticamente o una altura fija
+  display: block;        // Asegura que los márgenes automáticos funcionen
+  margin-left: auto;     // Centra la imagen
+  margin-right: auto;    // Centra la imagen
+}
+
+// --- Estilos Generales ---
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -59,7 +71,7 @@ body {
   background-color: $color-principal-oscuro;
   color: $color-texto-claro;
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: hidden; // Previene el scroll horizontal
 }
 
 .contenido-principal,
@@ -80,14 +92,15 @@ body {
   padding: 20px;
 }
 
+// Imágenes específicas ahora usando el mixin de responsividad
 .imagen-uno,
 .imagen-dos,
 .imagen-tres {
-  width: 400px; // Corregido de '400x' a '400px'
-  height: 400px;
+  @include responsive-image($max-width: 400px, $height: 400px); // Aplicando mixin y manteniendo altura fija para estas
   border-radius: 20px;
   border: solid white;
   margin-top: 20px;
+  object-fit: cover; // Asegura que la imagen se ajuste manteniendo su relación de aspecto
 }
 
 /* Encabezado Principal */
@@ -104,7 +117,7 @@ body {
   border-bottom: 2px solid $color-acento-neon;
 
   .contenedor-logo .logo {
-    height: 50px;
+    height: 50px; // Altura fija para el logo
     filter: drop-shadow(0 0 5px $color-acento-neon);
   }
 }
@@ -266,7 +279,7 @@ h3 {
 }
 
 .seccion-info-contacto h2 {
-  color: white; // Corregido de 'white4' a 'white'
+  color: white;
 }
 
 .boton-accion {
@@ -333,11 +346,11 @@ h3 {
   @include card-heading;
 }
 
+// Aplicando mixin de responsividad a las imágenes dentro de tarjetas
 .tarjeta-producto img,
 .miembro-equipo img {
-  max-width: 100%;
-  height: 200px;
-  object-fit: cover;
+  @include responsive-image($height: 200px); // 100% width, height: 200px
+  object-fit: cover; // Asegura que la imagen se ajuste manteniendo su relación de aspecto
   border-radius: 5px;
   margin-bottom: 15px;
   border: 2px solid $color-acento-claro;
@@ -525,7 +538,7 @@ h3 {
 
 .contenedor-mapa {
   overflow: hidden;
-  padding-bottom: 56.25%;
+  padding-bottom: 56.25%; /* Relación de aspecto 16:9 para mapas responsivos */
   position: relative;
   height: 0;
   border-radius: 10px;
@@ -587,16 +600,14 @@ h3 {
 }
 
 
+/* Media Queries para Responsividad */
 
-/* Media Queries para Responsividad*/
-
-
-
-/* Teléfonos y tabletas pequeñas */
+/* Teléfonos y tabletas pequeñas (hasta 768px) */
 @media (max-width: 768px) {
+  // Ajustes para la navegación en pantallas pequeñas
   .navegacion-principal {
     ul {
-      display: none;
+      display: none; // Oculto por defecto
       flex-direction: column;
       width: 100%;
       position: absolute;
@@ -612,7 +623,7 @@ h3 {
       transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
 
       &.menu-abierto {
-        display: flex;
+        display: flex; // Visible cuando el menú está abierto
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
@@ -635,22 +646,23 @@ h3 {
     }
 
     .boton-menu {
-      display: block;
+      display: block; // Muestra el botón de menú
     }
   }
 
+  // Ajustes para submenús en pantallas pequeñas
   .sub-menu {
-    position: static;
+    position: static; // Para que no flote y ocupe espacio normal
     width: 100%;
     box-shadow: none;
     border-top: none;
     background-color: rgba(0, 136, 255, 0.1);
     padding: 0;
     border-radius: 0;
-    opacity: 1;
+    opacity: 1; // Siempre visible si el padre está abierto
     visibility: visible;
     transform: translateY(0);
-    transition: none;
+    transition: none; // Deshabilita la transición para una apertura inmediata
 
     .item-con-sub-menu:hover > & {
       display: flex;
@@ -668,6 +680,7 @@ h3 {
     }
   }
 
+  // Ajustes de fuente y padding en secciones
   .seccion-hero {
     h1 {
       font-size: 2.5em;
@@ -681,6 +694,7 @@ h3 {
     padding: 12px 25px;
   }
 
+  // Columnas de grid a una sola columna
   .contenedor-caracteristicas,
   .contenedor-miembros,
   .seccion-galeria-productos,
@@ -688,31 +702,32 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  // Altura de imágenes en tarjetas y las imágenes principales
   .tarjeta-producto img,
   .miembro-equipo img,
   .imagen-uno,
   .imagen-dos,
   .imagen-tres {
-    height: 180px;
+    height: 180px; // Reduce la altura fija para pantallas más pequeñas
   }
 
+  // Pie de página en formato de columna
   .pie-pagina {
-    flex-direction: column;
-
+    flex-direction: column; // Si el pie de página usa flexbox
     .redes-sociales {
       margin-top: 15px;
     }
   }
 }
 
-/* Teléfonos muy pequeños */
+/* Teléfonos muy pequeños (hasta 480px) */
 @media (max-width: 480px) {
   .cabecera-principal {
     padding: 10px 15px;
   }
 
   .contenedor-logo .logo {
-    height: 40px;
+    height: 40px; // Reduce aún más el tamaño del logo
   }
 
   .seccion-hero h1 {
@@ -740,5 +755,26 @@ h3 {
 
   .pie-pagina p {
     font-size: 0.9em;
+  }
+
+  // Ajustes de padding en el contenedor principal
+  .contenedor {
+    padding: 15px;
+  }
+
+  // Ajustes de padding en las secciones
+  .seccion-caracteristicas,
+  .seccion-listado-servicios,
+  .seccion-galeria-productos,
+  .seccion-testimonios,
+  .seccion-historia,
+  .seccion-mision-vision,
+  .seccion-equipo,
+  .seccion-formulario-contacto,
+  .seccion-info-contacto,
+  .seccion-mapa,
+  .seccion-faq {
+    padding: 20px;
+    margin-bottom: 20px;
   }
 }

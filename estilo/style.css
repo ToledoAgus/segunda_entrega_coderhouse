@@ -1,7 +1,6 @@
 @charset "UTF-8";
 /* Variables Sass para colores */
 /* Paleta de azules futuristas */
-/* Estilos Generales */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -38,11 +37,16 @@ body {
 .imagen-uno,
 .imagen-dos,
 .imagen-tres {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 20px;
   border: solid white;
   margin-top: 20px;
+  object-fit: cover;
 }
 
 /* Encabezado Principal */
@@ -295,8 +299,12 @@ h3 {
 
 .tarjeta-producto img,
 .miembro-equipo img {
-  max-width: 100%;
+  width: 100%;
+  max-width: none;
   height: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   object-fit: cover;
   border-radius: 5px;
   margin-bottom: 15px;
@@ -473,7 +481,7 @@ h3 {
 
 .contenedor-mapa {
   overflow: hidden;
-  padding-bottom: 56.25%;
+  padding-bottom: 56.25%; /* Relación de aspecto 16:9 para mapas responsivos */
   position: relative;
   height: 0;
   border-radius: 10px;
@@ -532,8 +540,8 @@ h3 {
   text-shadow: 0 0 8px #00eaff;
 }
 
-/* Media Queries para Responsividad*/
-/* Teléfonos y tabletas pequeñas */
+/* Media Queries para Responsividad */
+/* Teléfonos y tabletas pequeñas (hasta 768px) */
 @media (max-width: 768px) {
   .navegacion-principal ul {
     display: none;
@@ -626,7 +634,7 @@ h3 {
     margin-top: 15px;
   }
 }
-/* Teléfonos muy pequeños */
+/* Teléfonos muy pequeños (hasta 480px) */
 @media (max-width: 480px) {
   .cabecera-principal {
     padding: 10px 15px;
@@ -655,6 +663,23 @@ h3 {
   }
   .pie-pagina p {
     font-size: 0.9em;
+  }
+  .contenedor {
+    padding: 15px;
+  }
+  .seccion-caracteristicas,
+  .seccion-listado-servicios,
+  .seccion-galeria-productos,
+  .seccion-testimonios,
+  .seccion-historia,
+  .seccion-mision-vision,
+  .seccion-equipo,
+  .seccion-formulario-contacto,
+  .seccion-info-contacto,
+  .seccion-mapa,
+  .seccion-faq {
+    padding: 20px;
+    margin-bottom: 20px;
   }
 }
 
